@@ -79,6 +79,11 @@ const LoginPage = () => {
     loginMutation.mutate({ email, password });
   };
 
+  const handleAdminLogin = () => {
+    setEmail("admin@example.com");
+    setPassword("123456");
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
       <Card className="w-full max-w-md">
@@ -89,6 +94,16 @@ const LoginPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div
+            className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4"
+            role="alert"
+          >
+            <p className="font-bold">Demo Version</p>
+            <p>
+              This is a demo version of a live sales app developed for a client.
+              Some features have been removed for the client&apos;s privacy.
+            </p>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -120,13 +135,21 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <CardFooter className="flex flex-col gap-2">
+            <CardFooter className="flex flex-col gap-2 p-0">
               <Button
                 type="submit"
                 className="w-full"
                 disabled={loginMutation.isLoading}
               >
                 {loginMutation.isLoading ? "Signing in..." : "Sign in"}
+              </Button>
+              <Button
+                onClick={handleAdminLogin}
+                variant="outline"
+                className="w-full"
+                type="button"
+              >
+                Use Admin Credentials
               </Button>
             </CardFooter>
           </form>
